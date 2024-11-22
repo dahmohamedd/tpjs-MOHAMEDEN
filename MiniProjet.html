@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Moyenne</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculateur de Moyenne</h1>
+        <form id="notesForm">
+            <div class="form-group">
+                <label for="notes">Entrez vos notes (séparées par des virgules) :</label>
+                <input type="text" id="notes" placeholder="Exemple : 15, 18, 12">
+            </div>
+            <button type="button" id="calculateButton">Calculer la Moyenne</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        document.getElementById('calculateButton').addEventListener('click', function() {
+            const notesInput = document.getElementById('notes').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            // Validation des champs
+            if (!notesInput) {
+                resultDiv.textContent = "Veuillez entrer vos notes.";
+                resultDiv.style.color = "red";
+                return;
+            }
+
+            const notesArray = notesInput.split(',').map(note => parseFloat(note.trim()));
+
+            // Vérification des entrées
+            if (notesArray.some(isNaN)) {
+                resultDiv.textContent = "Toutes les entrées doivent être des nombres valides.";
+                resultDiv.style.color = "red";
+                return;
+            }
+
+            // Calcul de la moyenne
+            const sum = notesArray.reduce((acc, note) => acc + note, 0);
+            const average = (sum / notesArray.length).toFixed(2);
+
+            // Affichage du résultat
+            resultDiv.textContent = "Moyenne : ${average}";
+            resultDiv.style.color = "green";
+        });
+    </script>
+</body>
+</html>
