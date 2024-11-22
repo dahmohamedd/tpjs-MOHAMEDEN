@@ -6,13 +6,10 @@
     <title>Exercice 3</title>
     <script>
         function verifierAge() {
-            // Récupération de l'âge
             let age = document.getElementById("age").value;
 
-            // Conversion en nombre
             age = parseInt(age);
 
-            // Vérification et affichage du message
             if (!isNaN(age)) {
                 if (age >= 18) {
                     alert("Vous êtes majeur !");
